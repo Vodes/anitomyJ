@@ -9,20 +9,7 @@
 
 package com.dgtlrepublic.anitomyj;
 
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementAnimeSeasonPrefix;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementAnimeTitle;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementAnimeType;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementAnimeYear;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementEpisodeNumber;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementEpisodePrefix;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementEpisodeTitle;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementFileChecksum;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementReleaseGroup;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementReleaseVersion;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementUnknown;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementVideoResolution;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementVolumeNumber;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementVolumePrefix;
+import static com.dgtlrepublic.anitomyj.Element.ElementCategory.*;
 import static com.dgtlrepublic.anitomyj.Token.TokenCategory.kBracket;
 import static com.dgtlrepublic.anitomyj.Token.TokenCategory.kIdentifier;
 import static com.dgtlrepublic.anitomyj.Token.TokenCategory.kUnknown;
@@ -55,6 +42,7 @@ import com.dgtlrepublic.anitomyj.Token.TokenFlag;
  */
 public class Parser {
     private boolean isEpisodeKeywordsFound = false;
+    private boolean isSeasonKeywordsFound = false;
     private final ParserHelper parserHelper;
     private final ParserNumber parserNumber;
     private final List<Element> elements;
@@ -107,7 +95,8 @@ public class Parser {
         searchForIsolatedNumbers();
 
         if (options.parseEpisodeNumber) {
-            SearchForEpisodeNumber();
+            searchForEpisodeNumber();
+            searchForSeasonNumber();
         }
 
         searchForAnimeTitle();
@@ -179,17 +168,31 @@ public class Parser {
         }
     }
 
-    /** Search for episode number. */
-    private void SearchForEpisodeNumber() {
-        // List all unknown tokens that contain a number
-        List<Result> tokens = new ArrayList<>();
-        for (int i = 0; i < this.tokens.size(); i++) {
-            Token token = this.tokens.get(i);
+    private ArrayList<Result> listUnknownTokensWithNumber() {
+       var tokens = new ArrayList<Result>();
+        for (var i = 0; i < this.tokens.size(); i++) {
+            var token = this.tokens.get(i);
             if (token.getCategory() == kUnknown && ParserHelper.indexOfFirstDigit(token.getContent()) != -1) {
                 tokens.add(new Result(token, i));
             }
         }
 
+        return tokens;
+    }
+
+    private void searchForSeasonNumber() {
+        var tokens = listUnknownTokensWithNumber();
+        if (tokens.isEmpty()) return;
+
+        isSeasonKeywordsFound = !empty(kElementAnimeSeason);
+
+        // If a token matches a known episode pattern, it has to be the episode number
+        parserNumber.searchForSeasonPatterns(tokens);
+    }
+
+    /** Search for episode number. */
+    private void searchForEpisodeNumber() {
+        var tokens = listUnknownTokensWithNumber();
         if (tokens.isEmpty()) return;
 
         isEpisodeKeywordsFound = !empty(kElementEpisodeNumber);

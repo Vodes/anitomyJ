@@ -1,4 +1,18 @@
 [ {
+  "file_name" : "[Ohys-raws] Shingeki no Kyojin SE01 (BD 1080p 10bit FLAC)",
+  "id" : 30383,
+  "ignore" : false,
+  "results" : {
+    "kElementAnimeTitle": "Shingeki no Kyojin",
+    "kElementAnimeSeason": "01",
+    "kElementAudioTerm": "FLAC",
+    "kElementFileName": "[Ohys-raws] Shingeki no Kyojin SE01 (BD 1080p 10bit FLAC)",
+    "kElementReleaseGroup": "Ohys-raws",
+    "kElementSource": "BD",
+    "kElementVideoResolution": "1080p",
+    "kElementVideoTerm": "10bit"
+  }
+}, {
   "file_name" : "[ANBU]_Princess_Lover!_-_01_[2048A39A].mkv",
   "id" : 6201,
   "ignore" : false,
@@ -2322,13 +2336,16 @@
   "id" : 30383,
   "ignore" : false,
   "results" : {
-    "kElementAnimeTitle" : "Classroom Crisis",
-    "kElementAudioTerm" : "FLAC",
-    "kElementFileName" : "[GS] Classroom Crisis Vol.1&2 (BD 1080p 10bit FLAC)",
-    "kElementReleaseGroup" : "GS",
-    "kElementSource" : "BD",
-    "kElementVideoResolution" : "1080p",
-    "kElementVideoTerm" : "10bit",
-    "kElementVolumeNumber" : [ "1", "2"]
+    "kElementAnimeTitle": "Classroom Crisis",
+    "kElementAudioTerm": "FLAC",
+    "kElementFileName": "[GS] Classroom Crisis Vol.1&2 (BD 1080p 10bit FLAC)",
+    "kElementReleaseGroup": "GS",
+    "kElementSource": "BD",
+    "kElementVideoResolution": "1080p",
+    "kElementVideoTerm": "10bit",
+    "kElementVolumeNumber": [
+      "1",
+      "2"
+    ]
   }
 } ]

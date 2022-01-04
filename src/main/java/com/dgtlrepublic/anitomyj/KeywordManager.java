@@ -61,7 +61,7 @@ public class KeywordManager {
         KeywordOptions optionsUnidentifiableInvalid = new KeywordOptions(false, true, false);
         KeywordOptions optionsUnidentifiableUnsearchable = new KeywordOptions(false, false, true);
 
-        add(kElementAnimeSeasonPrefix, optionsUnidentifiable, Arrays.asList("SAISON", "SEASON"));
+        add(kElementAnimeSeasonPrefix, optionsUnidentifiable, Arrays.asList("SAISON", "SEASON", "SE"));
 
         add(kElementAnimeType,
             optionsUnidentifiable,

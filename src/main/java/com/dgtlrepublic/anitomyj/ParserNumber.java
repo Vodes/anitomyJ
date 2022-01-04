@@ -9,14 +9,7 @@
 
 package com.dgtlrepublic.anitomyj;
 
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementAnimeSeason;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementAnimeType;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementEpisodeNumber;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementEpisodeNumberAlt;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementEpisodePrefix;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementReleaseVersion;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementVolumeNumber;
-import static com.dgtlrepublic.anitomyj.Element.ElementCategory.kElementVolumePrefix;
+import static com.dgtlrepublic.anitomyj.Element.ElementCategory.*;
 import static com.dgtlrepublic.anitomyj.Token.TokenCategory.kBracket;
 import static com.dgtlrepublic.anitomyj.Token.TokenCategory.kDelimiter;
 import static com.dgtlrepublic.anitomyj.Token.TokenCategory.kIdentifier;
@@ -79,6 +72,24 @@ public class ParserNumber {
     /** Sets the alternative episode number. */
     public boolean setAlternativeEpisodeNumber(String number, Token token) {
         parser.getElements().add(new Element(kElementEpisodeNumberAlt, number));
+        token.setCategory(kIdentifier);
+        return true;
+    }
+
+    /**
+     * Sets the season number.
+     *
+     * @param number   the number
+     * @param token    the token which contains the season number
+     * @param validate true if we should check if it's a valid number; false to disable verification.
+     * @return true if the volume number was set
+     */
+    public boolean setSeasonNumber(String number, Token token, boolean validate) {
+        if (validate && !isValidVolumeNumber(number)) {
+            return false;
+        }
+
+        parser.getElements().add(new Element(kElementAnimeSeason, number));
         token.setCategory(kIdentifier);
         return true;
     }
@@ -158,6 +169,10 @@ public class ParserNumber {
                 case kElementVolumePrefix:
                     if (!matchVolumePatterns(number, token))
                         setVolumeNumber(number, token, false);
+                    return true;
+                case kElementAnimeSeasonPrefix:
+                    if (!matchSeasonPatterns(number, token))
+                        setSeasonNumber(number, token, false);
                     return true;
             }
         }
@@ -444,6 +459,82 @@ public class ParserNumber {
         return false;
     }
 
+    /**
+     * Attempts to find a season numbers inside a {@code word}.
+     *
+     * @param word  the word
+     * @param token the token
+     * @return true if the word was matched to a season number
+     */
+    public boolean matchSeasonPatterns(String word, Token token) {
+        // All patterns contain at least one non-numeric character
+        if (StringHelper.isNumericString(word)) return false;
+
+        word = StringHelper.trimAny(word, " -");
+
+        boolean numericFront = Character.isDigit(word.charAt(0));
+        boolean numericBack = Character.isDigit(word.charAt(word.length() - 1));
+
+        // e.g. "01v2"
+        if (numericFront && numericBack)
+            if (matchSingleSeasonPattern(word, token))
+                return true;
+        // e.g. "01-02", "03-05v2"
+        if (numericFront && numericBack)
+            return matchMultiSeasonPattern(word, token);
+
+        return false;
+    }
+
+    /**
+     * Match single volume. e.g. "01v2".
+     *
+     * @param word  the word
+     * @param token the token
+     * @return true if the token matched
+     */
+    public boolean matchSingleSeasonPattern(String word, Token token) {
+        if (StringUtils.isEmpty(word)) word = "";
+        String regexPattern = "(\\d{1,2})[vV](\\d)";
+        Pattern pattern = Pattern.compile(regexPattern);
+        Matcher matcher = pattern.matcher(word);
+        if (matcher.matches()) {
+            setSeasonNumber(matcher.group(1), token, false);
+            parser.getElements().add(new Element(kElementReleaseVersion, matcher.group(2)));
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Match multi-volume. e.g. "01-02", "03-05v2".
+     *
+     * @param word  the word
+     * @param token the token
+     * @return true if the token matched
+     */
+    public boolean matchMultiSeasonPattern(String word, Token token) {
+        if (StringUtils.isEmpty(word)) word = "";
+        String regexPattern = "(\\d{1,2})[-~&+](\\d{1,2})(?:[vV](\\d))?";
+        Pattern pattern = Pattern.compile(regexPattern);
+        Matcher matcher = pattern.matcher(word);
+        if (matcher.matches()) {
+            String lowerBound = matcher.group(1);
+            String upperBound = matcher.group(2);
+            if (StringHelper.stringToInt(lowerBound) < StringHelper.stringToInt(upperBound)) {
+                if (setSeasonNumber(lowerBound, token, true)) {
+                    setSeasonNumber(upperBound, token, false);
+                    if (StringUtils.isNotEmpty(matcher.group(3)))
+                        parser.getElements().add(new Element(kElementReleaseVersion, matcher.group(3)));
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     /************ V O L U M E  M A T C H E R S ********** */
 
     /**
@@ -557,6 +648,32 @@ public class ParserNumber {
                     previousToken.token.setCategory(kIdentifier);
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Searches for season patterns in a list of {@code tokens}.
+     *
+     * @param tokens the list of tokens
+     * @return true if an episode number was found
+     */
+    public boolean searchForSeasonPatterns(List<Result> tokens) {
+        for (Result it : tokens) {
+            boolean numericFront = it.token.getContent().length() > 0 && Character.isDigit(it.token.getContent()
+                    .charAt(0));
+
+            if (!numericFront) {
+                // e.g. "EP.1", "Vol.1"
+                if (numberComesAfterPrefix(kElementAnimeSeasonPrefix, it.token))
+                    return true;
+            }
+
+            // Look for other patterns
+            if (matchSeasonPatterns(it.token.getContent(), it.token)) {
+                return true;
             }
         }
 
