@@ -144,7 +144,7 @@ public class KeywordManager {
                 // Frame rate
                 "23.976FPS", "24FPS", "29.97FPS", "30FPS", "60FPS", "120FPS",
                 // Video codec
-                "8BIT", "8-BIT", "10BIT", "10BITS", "10-BIT", "10-BITS", "HI10P",
+                "8BIT", "8-BIT", "10BIT", "10BITS", "10-BIT", "10-BITS", "HI10", "HI10P",
                 "H264", "H265", "H.264", "H.265", "X264", "X265", "X.264",
                 "AVC", "HEVC", "DIVX", "DIVX5", "DIVX6", "XVID",
                 // Video format
