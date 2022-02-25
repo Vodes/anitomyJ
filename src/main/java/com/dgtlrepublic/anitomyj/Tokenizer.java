@@ -296,6 +296,13 @@ public class Tokenizer {
                         appendTokenTo.accept(token, prevToken);
                     }
                 }
+            } else if(isDelimiterToken.apply(prevToken) && isDelimiterToken.apply(nextToken)) {
+                char prevDelimiter = prevToken.token.getContent().charAt(0);
+                char nextDelimiter = nextToken.token.getContent().charAt(0);
+
+                if(prevDelimiter == nextDelimiter && prevDelimiter != delimiter) {
+                    token.setCategory(TokenCategory.kUnknown);
+                }
             }
         }
 
