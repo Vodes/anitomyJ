@@ -1,5 +1,16 @@
 [
 	{
+		"anime_title": "Shingeki no Kyojin",
+		"anime_season": "01",
+		"audio_term": "FLAC",
+		"source": "BD",
+		"video_resolution": "1080p",
+		"video_term": "10bit",
+		"file_name" : "[Ohys-raws] Shingeki no Kyojin SE01 (BD 1080p 10bit FLAC)",
+		"id" : 30383,
+		"release_group": "Ohys-raws"
+	},
+	{
 		"anime_title": "Princess Lover!",
 		"episode_number": "01",
 		"file_checksum": "2048A39A",
@@ -1903,5 +1914,22 @@
 		"file_name": "[Infantjedi] Norn9 - Norn + Nonetto - 12",
 		"id": 31452,
 		"release_group": "Infantjedi"
+	},
+	{
+		"anime_title": "Dragon Ball Z Movies",
+		"audio_term": "DTS",
+		"episode_number": [
+			"8",
+			"10"
+		],
+		"file_name": "Dragon_Ball_Z_Movies_8_&_10_[720p,BluRay,DTS,x264]_-_THORA",
+		"id": [
+			901,
+			903
+		],
+		"release_group": "THORA",
+		"source": "BluRay",
+		"video_resolution": "720p",
+		"video_term": "x264"
 	}
 ]
