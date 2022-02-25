@@ -46,7 +46,7 @@ public class DataTest {
     private static void verify(Map entry) throws Exception {
         String fileName = (String) entry.getOrDefault("file_name", "");
         boolean ignore = (Boolean) entry.getOrDefault("ignore", false);
-        int id = (Integer) entry.getOrDefault("id", -1);
+        Object id = entry.getOrDefault("id", -1);
         HashMap<String, Object> testCases = (HashMap<String, Object>) entry.getOrDefault("results",
                                                                                          new HashMap<String, Object>());
         if (ignore || StringUtils.isBlank(fileName) || testCases.size() == 0) {

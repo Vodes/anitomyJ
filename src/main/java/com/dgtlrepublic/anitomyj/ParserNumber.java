@@ -19,9 +19,7 @@ import static com.dgtlrepublic.anitomyj.Token.TokenFlag.kFlagNotDelimiter;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -46,6 +44,12 @@ public class ParserNumber {
     public static final int kAnimeYearMax = 2050;
     public static final int kEpisodeNumberMax = kAnimeYearMin - 1;
     public static final int kVolumeNumberMax = 20;
+
+    private static final Map<String, Boolean> numberComesBeforeAnotherNumberSeparators = new HashMap<>();
+    static {
+        numberComesBeforeAnotherNumberSeparators.put("&", true);
+        numberComesBeforeAnotherNumberSeparators.put("of", false);
+    }
 
     private final Parser parser;
 
@@ -187,18 +191,23 @@ public class ParserNumber {
      * @param currentTokenIdx the index of the token.
      * @return true if the token precedes the word "of"
      */
-    public boolean numberComesBeforeTotalNumber(Token token, int currentTokenIdx) {
-        Result nextToken = Token.findNextToken(parser.getTokens(), currentTokenIdx, kFlagNotDelimiter);
-        if (nextToken.token != null) {
-            if (StringUtils.equalsIgnoreCase(nextToken.token.getContent(), "of")) {
-                Result otherToken = Token.findNextToken(parser.getTokens(), nextToken, kFlagNotDelimiter);
-
-                if (otherToken.token != null) {
-                    if (StringHelper.isNumericString(otherToken.token.getContent())) {
-                        setEpisodeNumber(token.getContent(), token, false);
-                        nextToken.token.setCategory(kIdentifier);
-                        otherToken.token.setCategory(kIdentifier);
-                        return true;
+    public boolean numberComesBeforeAnotherNumber(Token token, int currentTokenIdx) {
+        Result separatorToken = Token.findNextToken(parser.getTokens(), currentTokenIdx, kFlagNotDelimiter);
+        if (separatorToken.token != null) {
+            // loop can be removed using a lowercase map query, but i dont want to change the codebase too much
+            for(String separator : numberComesBeforeAnotherNumberSeparators.keySet()) {
+                if(StringUtils.equalsIgnoreCase(separatorToken.token.getContent(), separator)) {
+                    Result otherToken = Token.findNextToken(parser.getTokens(), separatorToken, kFlagNotDelimiter);
+                    if (otherToken.token != null) {
+                        if (StringHelper.isNumericString(otherToken.token.getContent())) {
+                            setEpisodeNumber(token.getContent(), token, false);
+                            if(numberComesBeforeAnotherNumberSeparators.get(separator)) {
+                                setEpisodeNumber(otherToken.token.getContent(), otherToken.token, false);
+                            }
+                            separatorToken.token.setCategory(kIdentifier);
+                            otherToken.token.setCategory(kIdentifier);
+                            return true;
+                        }
                     }
                 }
             }
@@ -698,8 +707,8 @@ public class ParserNumber {
                 if (numberComesAfterPrefix(kElementVolumePrefix, it.token))
                     continue;
             } else {
-                // e.g. "8 of 12"
-                if (numberComesBeforeTotalNumber(it.token, it.pos))
+                // e.g. "8 & 10", "01 of 24"
+                if(numberComesBeforeAnotherNumber(it.token, it.pos))
                     return true;
             }
 
