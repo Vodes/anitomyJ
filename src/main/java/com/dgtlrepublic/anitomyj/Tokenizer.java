@@ -304,6 +304,16 @@ public class Tokenizer {
                     token.setCategory(TokenCategory.kUnknown);
                 }
             }
+
+            // Check for other special cases
+            if(delimiter == '&' || delimiter == '+') {
+                if (isUnknownToken.apply(prevToken) && isUnknownToken.apply(nextToken)) {
+                    if (StringUtils.isNumeric(prevToken.token.getContent()) && StringUtils.isNumeric(nextToken.token.getContent())) {
+                        appendTokenTo.accept(token, prevToken);
+                        appendTokenTo.accept(nextToken.token, prevToken);
+                    }
+                }
+            }
         }
 
         /** remove invalid tokens */

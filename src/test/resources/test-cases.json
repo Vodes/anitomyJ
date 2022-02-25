@@ -2370,4 +2370,15 @@
     "kElementVideoResolution" : "720p",
     "kElementVideoTerm" : "x264"
   }
+}, {
+  "file_name" : "[HorribleSubs] Momokuri - 01+02 [720p]",
+  "id" : -1,
+  "ignore" : false,
+  "results" : {
+    "kElementAnimeTitle" : "Momokuri",
+    "kElementEpisodeNumber" : [ "01", "02" ],
+    "kElementFileName" : "[HorribleSubs] Momokuri - 01+02 [720p]",
+    "kElementReleaseGroup" : "HorribleSubs",
+    "kElementVideoResolution" : "720p"
+  }
 } ]
