@@ -322,16 +322,28 @@ public class Parser {
 
     /** Search for episode title. */
     private void searchForEpisodeTitle() {
-        // Find the first non-enclosed unknown token
-        Result tokenBegin = Token.findToken(tokens, kFlagNotEnclosed, kFlagUnknown);
-        if (tokenBegin.token == null) return;
+        Result tokenBegin;
+        Result tokenEnd = new Result(null, 0);
+        do {
+            // Find the first non-enclosed unknown token
+            tokenBegin = Token.findToken(tokens, tokenEnd, kFlagNotEnclosed, kFlagUnknown);
+            if (tokenBegin.token == null) return;
 
-        // Continue until a bracket or identifier is found
-        Result tokenEnd = Token.findToken(tokens, tokenBegin, kFlagBracket, kFlagIdentifier);
+            // Continue until a bracket or identifier is found
+            tokenEnd = Token.findToken(tokens, tokenBegin, kFlagBracket, kFlagIdentifier);
 
-        int end = tokens.size();
-        if (tokenEnd.pos != null) end = Math.min(tokenEnd.pos, end);
-        parserHelper.buildElement(kElementEpisodeTitle, false, tokens.subList(tokenBegin.pos, end));
+            int end = tokens.size();
+            if (tokenEnd.pos != null) end = Math.min(tokenEnd.pos, end);
+
+            // Ignore if it's only a dash
+            if (end - tokenBegin.pos <= 2 &&
+                    ParserHelper.isDashCharacter(tokenBegin.token.getContent().charAt(0))) {
+                continue;
+            }
+
+            parserHelper.buildElement(kElementEpisodeTitle, false, tokens.subList(tokenBegin.pos, end));
+            return;
+        } while (tokenBegin.token != null);
     }
 
     /** Search for isolated numbers. */
