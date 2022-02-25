@@ -104,7 +104,7 @@ public class KeywordManager {
 
         add(kElementFileExtension, optionsDefault, Arrays.asList(
                 "3GP", "AVI", "DIVX", "FLV", "M2TS", "MKV", "MOV", "MP4", "MPG",
-                "OGM", "RM", "RMVB", "WEBM", "WMV"));
+                "OGM", "RM", "RMVB", "TS", "WEBM", "WMV"));
 
         add(kElementFileExtension, optionsInvalid, Arrays.asList(
                 "AAC", "AIFF", "FLAC", "M4A", "MP3", "MKA", "OGG", "WAV", "WMA",
