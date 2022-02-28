@@ -169,9 +169,9 @@ public class Parser {
     }
 
     private ArrayList<Result> listUnknownTokensWithNumber() {
-       var tokens = new ArrayList<Result>();
-        for (var i = 0; i < this.tokens.size(); i++) {
-            var token = this.tokens.get(i);
+        ArrayList<Result> tokens = new ArrayList<>();
+        for (int i = 0; i < this.tokens.size(); i++) {
+            Token token = this.tokens.get(i);
             if (token.getCategory() == kUnknown && ParserHelper.indexOfFirstDigit(token.getContent()) != -1) {
                 tokens.add(new Result(token, i));
             }
@@ -181,7 +181,7 @@ public class Parser {
     }
 
     private void searchForSeasonNumber() {
-        var tokens = listUnknownTokensWithNumber();
+        ArrayList<Result> tokens = listUnknownTokensWithNumber();
         if (tokens.isEmpty()) return;
 
         isSeasonKeywordsFound = !empty(kElementAnimeSeason);
@@ -192,7 +192,7 @@ public class Parser {
 
     /** Search for episode number. */
     private void searchForEpisodeNumber() {
-        var tokens = listUnknownTokensWithNumber();
+        ArrayList<Result> tokens = listUnknownTokensWithNumber();
         if (tokens.isEmpty()) return;
 
         isEpisodeKeywordsFound = !empty(kElementEpisodeNumber);
