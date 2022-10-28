@@ -228,7 +228,7 @@ public class KeywordManager {
                            List<Element> elements,
                            List<TokenRange> preidentifiedTokens) {
         int endR = range.getOffset() + range.getSize();
-        String search = filename.substring(range.getOffset(), endR > filename.length() ? filename.length() : endR);
+        String search = filename.substring(range.getOffset(), Math.min(endR, filename.length()));
         peekEntries.forEach(entry -> entry.getRight().forEach(keyword -> {
             int foundIdx = search.indexOf(keyword);
             if (foundIdx != -1) {
