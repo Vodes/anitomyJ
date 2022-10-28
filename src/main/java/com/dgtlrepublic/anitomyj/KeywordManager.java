@@ -96,7 +96,7 @@ public class KeywordManager {
 
         add(kElementEpisodePrefix, optionsDefault, Arrays.asList(
                 "EP", "EP.", "EPS", "EPS.", "EPISODE", "EPISODE.", "EPISODES",
-                "CAPITULO", "EPISODIO", "FOLGE"));
+                "CAPITULO", "EPISODIO", "EPIS\u00F3DIO", "FOLGE"));
 
         add(kElementEpisodePrefix,
             optionsInvalid,
