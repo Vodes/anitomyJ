@@ -332,6 +332,8 @@ public class ParserNumber {
         Pattern pattern = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {
+            if(Integer.parseInt(matcher.group(1)) == 0)
+                return false;
             parser.getElements().add(new Element(kElementAnimeSeason, matcher.group(1)));
             if (StringUtils.isNotEmpty(matcher.group(2)))
                 parser.getElements().add(new Element(kElementAnimeSeason, matcher.group(2)));
