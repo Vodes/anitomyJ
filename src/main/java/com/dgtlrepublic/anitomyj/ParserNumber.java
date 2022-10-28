@@ -277,7 +277,7 @@ public class ParserNumber {
      * @return true if the token matched
      */
     public boolean matchSingleEpisodePattern(String word, Token token) {
-        String regexPattern = "(\\d{1,3})[vV](\\d)";
+        String regexPattern = "(\\d{1,4})[vV](\\d)";
         Pattern pattern = Pattern.compile(regexPattern);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {
@@ -297,7 +297,7 @@ public class ParserNumber {
      * @return true if the token matched
      */
     public boolean matchMultiEpisodePattern(String word, Token token) {
-        String regexPattern = "(\\d{1,3})(?:[vV](\\d))?[-~&+](\\d{1,3})(?:[vV](\\d))?";
+        String regexPattern = "(\\d{1,4})(?:[vV](\\d))?[-~&+](\\d{1,3})(?:[vV](\\d))?";
         Pattern pattern = Pattern.compile(regexPattern);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {
@@ -328,7 +328,7 @@ public class ParserNumber {
      * @return true if the token matched
      */
     public boolean matchSeasonAndEpisodePattern(String word, Token token) {
-        String regexPattern = "S?(\\d{1,2})(?:-S?(\\d{1,2}))?(?:x|[ ._-x]?E)(\\d{1,3})(?:-E?(\\d{1,3}))?";
+        String regexPattern = "S?(\\d{1,2})(?:-S?(\\d{1,2}))?(?:x|[ ._-x]?E)(\\d{1,4})(?:-E?(\\d{1,4}))?";
         Pattern pattern = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {
@@ -432,7 +432,7 @@ public class ParserNumber {
      */
     public boolean matchNumberSignPattern(String word, Token token) {
         if (StringUtils.isEmpty(word) || word.charAt(0) != '#') word = "";
-        String regexPattern = "#(\\d{1,3})(?:[-~&+](\\d{1,3}))?(?:[vV](\\d))?";
+        String regexPattern = "#(\\d{1,4})(?:[-~&+](\\d{1,4}))?(?:[vV](\\d))?";
         Pattern pattern = Pattern.compile(regexPattern);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {
@@ -457,7 +457,7 @@ public class ParserNumber {
      */
     public boolean matchJapaneseCounterPattern(String word, Token token) {
         if (StringUtils.isEmpty(word) || word.charAt(word.length() - 1) != '\u8A71') return false;
-        String regexPattern = "(\\d{1,3})\u8A71";
+        String regexPattern = "(\\d{1,4})\u8A71";
         Pattern pattern = Pattern.compile(regexPattern);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {

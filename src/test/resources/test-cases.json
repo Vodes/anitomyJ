@@ -2191,6 +2191,7 @@
   "results" : {
     "kElementAnimeTitle" : "Dragon Ball KAI",
     "kElementEpisodeNumber" : "01",
+    "kElementEpisodeTitle" : "DHD",
     "kElementFileExtension" : "mkv",
     "kElementFileName" : "Dragon.Ball.KAI.-.01.-.1080p.BluRay.x264.DHD",
     "kElementSource" : "BluRay",
@@ -2398,5 +2399,18 @@
     "kElementFileName" : "[HorribleSubs] Momokuri - 01+02 [720p]",
     "kElementReleaseGroup" : "HorribleSubs",
     "kElementVideoResolution" : "720p"
+  }
+}, {
+  "file_name" : "[(´• ω •`)] Nintama Rantarou - S23E1821 - Buddhist Priest-sama is a Ninja.mkv",
+  "id" : -1,
+  "ignore" : false,
+  "results" : {
+    "kElementAnimeSeason" : "23",
+    "kElementAnimeTitle" : "Nintama Rantarou",
+    "kElementEpisodeNumber" : "1821",
+    "kElementEpisodeTitle" : "Buddhist Priest-sama is a Ninja",
+    "kElementFileExtension" : "mkv",
+    "kElementFileName" : "[(´• ω •`)] Nintama Rantarou - S23E1821 - Buddhist Priest-sama is a Ninja",
+    "kElementReleaseGroup" : "(´• ω •`)"
   }
 } ]
