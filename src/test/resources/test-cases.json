@@ -2413,4 +2413,16 @@
     "kElementFileName" : "[(´• ω •`)] Nintama Rantarou - S23E1821 - Buddhist Priest-sama is a Ninja",
     "kElementReleaseGroup" : "(´• ω •`)"
   }
+}, {
+  "file_name" : "[Judas] Aharen-san wa Hakarenai - S01E06v2.mkv",
+  "id" : -1,
+  "ignore" : false,
+  "results" : {
+    "kElementAnimeSeason" : "01",
+    "kElementAnimeTitle" : "Aharen-san wa Hakarenai",
+    "kElementEpisodeNumber" : "06",
+    "kElementFileExtension" : "mkv",
+    "kElementFileName" : "[Judas] Aharen-san wa Hakarenai - S01E06v2",
+    "kElementReleaseGroup" : "Judas"
+  }
 } ]

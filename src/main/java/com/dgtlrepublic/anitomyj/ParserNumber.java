@@ -328,7 +328,7 @@ public class ParserNumber {
      * @return true if the token matched
      */
     public boolean matchSeasonAndEpisodePattern(String word, Token token) {
-        String regexPattern = "S?(\\d{1,2})(?:-S?(\\d{1,2}))?(?:x|[ ._-x]?E)(\\d{1,4})(?:-E?(\\d{1,4}))?";
+        String regexPattern = "S?(\\d{1,2})(?:-S?(\\d{1,2}))?(?:x|[ ._-x]?E)(\\d{1,4})(?:-E?(\\d{1,4}))?(?:[vV](\\d))?";
         Pattern pattern = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(word);
         if (matcher.matches()) {
