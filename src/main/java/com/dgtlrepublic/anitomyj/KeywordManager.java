@@ -149,6 +149,7 @@ public class KeywordManager {
                 "HI10", "HI10P", "HI444", "HI444P", "HI444PP",
                 "H264", "H265", "H.264", "H.265", "X264", "X265", "X.264",
                 "AVC", "HEVC", "HEVC2", "DIVX", "DIVX5", "DIVX6", "XVID",
+                "AV1",
                 // Video format
                 "AVI", "RMVB", "WMV", "WMV3", "WMV9",
                 // Video quality
