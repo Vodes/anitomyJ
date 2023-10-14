@@ -78,15 +78,18 @@ public class KeywordManager {
 
         add(kElementAudioTerm, optionsDefault, Arrays.asList(
                 // Audio channels
-                "2.0CH", "2CH", "5.1", "5.1CH", "DTS", "DTS-ES", "DTS5.1",
-                "TRUEHD5.1",
+                "2.0CH", "2CH", "5.1", "5.1CH", "7.1", "7.1CH", "DTS", "DTS-ES", "DTS5.1",
+                "DOLBY TRUEHD", "TRUEHD", "TRUEHD5.1",
                 // Audio codec
                 "AAC", "AACX2", "AACX3", "AACX4", "AC3", "EAC3", "E-AC-3",
                 "FLAC", "FLACX2", "FLACX3", "FLACX4", "LOSSLESS", "MP3", "OGG",
                 "VORBIS",
+                "ATMOS", "DOLBY ATMOS",
                 // Audio language
                 "DUALAUDIO", "DUAL AUDIO"
         ));
+
+        add(kElementAudioTerm, optionsUnidentifiable, Arrays.asList("OPUS"));
 
         add(kElementDeviceCompatibility,
             optionsDefault,
@@ -139,7 +142,8 @@ public class KeywordManager {
 
         add(kElementSubtitles, optionsDefault, Arrays.asList(
                 "ASS", "BIG5", "DUB", "DUBBED", "HARDSUB", "HARDSUBS", "RAW",
-                "SOFTSUB", "SOFTSUBS", "SUB", "SUBBED", "SUBTITLED"));
+                "SOFTSUB", "SOFTSUBS", "SUB", "SUBBED", "SUBTITLED",
+                "MULTISUB", "MULTI SUB"));
 
         add(kElementVideoTerm, optionsDefault, Arrays.asList(
                 // Frame rate
@@ -147,6 +151,7 @@ public class KeywordManager {
                 // Video codec
                 "8BIT", "8-BIT", "10BIT", "10BITS", "10-BIT", "10-BITS",
                 "HI10", "HI10P", "HI444", "HI444P", "HI444PP",
+                "HDR", "DV", "DOLBY VISION",
                 "H264", "H265", "H.264", "H.265", "X264", "X265", "X.264",
                 "AVC", "HEVC", "HEVC2", "DIVX", "DIVX5", "DIVX6", "XVID",
                 "AV1",
@@ -155,7 +160,7 @@ public class KeywordManager {
                 // Video quality
                 "HQ", "LQ",
                 // Video resolution
-                "HD", "SD"));
+                "4K", "HD", "SD"));
 
         add(kElementVolumePrefix, optionsDefault, Arrays.asList("VOL", "VOL.", "VOLUME"));
 
@@ -163,7 +168,7 @@ public class KeywordManager {
         peekEntries = new ArrayList<Pair<ElementCategory, List<String>>>() {{
             add(Pair.of(kElementAudioTerm, Arrays.asList("Dual Audio")));
             add(Pair.of(kElementVideoTerm, Arrays.asList("H264", "H.264", "h264", "h.264")));
-            add(Pair.of(kElementVideoResolution, Arrays.asList("480p", "720p", "1080p")));
+            add(Pair.of(kElementVideoResolution, Arrays.asList("480p", "720p", "1080p", "2160p")));
             add(Pair.of(kElementSource, Arrays.asList("Blu-Ray")));
         }};
     }
