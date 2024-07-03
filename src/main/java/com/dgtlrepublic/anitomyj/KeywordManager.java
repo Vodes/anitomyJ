@@ -85,11 +85,13 @@ public class KeywordManager {
                 "FLAC", "FLACX2", "FLACX3", "FLACX4", "LOSSLESS", "MP3", "OGG",
                 "VORBIS",
                 "ATMOS", "DOLBY ATMOS",
+                // Other variations used in scene/p2p naming
+                "DDP2.0", "AAC2.0", "DDP5.1", "AAC5.1", "Opus2.0", "Opus5.1", "FLAC2.0", "FLAC5.1",
                 // Audio language
                 "DUALAUDIO", "DUAL AUDIO"
         ));
 
-        add(kElementAudioTerm, optionsUnidentifiable, Arrays.asList("OPUS"));
+        add(kElementAudioTerm, optionsUnidentifiable, Arrays.asList("OPUS", "DUAL"));
 
         add(kElementDeviceCompatibility,
             optionsDefault,
@@ -138,7 +140,12 @@ public class KeywordManager {
                 "DVD", "DVD5", "DVD9", "DVD-R2J", "DVDRIP", "DVD-RIP",
                 "R2DVD", "R2J", "R2JDVD", "R2JDVDRIP",
                 "HDTV", "HDTVRIP", "TVRIP", "TV-RIP",
-                "WEBCAST", "WEBRIP"));
+                "WEBCAST", "WEBRIP", "WEB-DL",
+                // Specific services
+                "AMZN", "HIDI", "HIDIVE", "B-Global", "ADN", "ABEMA"
+                ));
+
+        add(kElementSource, optionsUnidentifiable, Arrays.asList("CR", "IT", "MAX", "HMAX"));
 
         add(kElementSubtitles, optionsDefault, Arrays.asList(
                 "ASS", "BIG5", "DUB", "DUBBED", "HARDSUB", "HARDSUBS", "RAW",
