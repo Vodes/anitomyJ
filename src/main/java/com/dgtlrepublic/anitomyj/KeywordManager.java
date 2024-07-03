@@ -126,7 +126,7 @@ public class KeywordManager {
                 "TS", "VFR", "WIDESCREEN", "WS"));
 
         add(kElementReleaseGroup, optionsDefault, Arrays.asList("THORA"));
-        add(kElementReleaseGroup, optionsUnidentifiableInvalid, Arrays.asList("CR", "NF", "HIDI", "AMZN", "ADN", "ABEMA"));
+        add(kElementReleaseGroup, optionsInvalid, Arrays.asList("CR", "NF", "HIDI", "AMZN", "ADN", "ABEMA"));
 
         add(kElementReleaseInformation, optionsDefault, Arrays.asList("BATCH", "COMPLETE", "PATCH", "REMUX"));
 
