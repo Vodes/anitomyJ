@@ -126,7 +126,7 @@ public class KeywordManager {
                 "TS", "VFR", "WIDESCREEN", "WS"));
 
         add(kElementReleaseGroup, optionsDefault, Arrays.asList("THORA"));
-        
+
         add(kElementReleaseInformation, optionsDefault, Arrays.asList("BATCH", "COMPLETE", "PATCH", "REMUX"));
 
         add(kElementReleaseInformation,
@@ -142,8 +142,8 @@ public class KeywordManager {
                 "HDTV", "HDTVRIP", "TVRIP", "TV-RIP",
                 "WEBCAST", "WEBRIP", "WEB-DL",
                 // Specific services
-                "AMZN", "HIDI", "HIDIVE", "B-Global", "ADN", "ABEMA", "NF"
-                ));
+                "AMZN", "HIDI", "HIDIVE", "B-Global", "ADN", "ABEMA", "NF", "DSNP", "HULU"
+        ));
 
         add(kElementSource, optionsUnidentifiable, Arrays.asList("CR", "IT", "MAX", "HMAX"));
 
