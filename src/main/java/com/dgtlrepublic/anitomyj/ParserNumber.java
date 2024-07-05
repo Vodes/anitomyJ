@@ -702,9 +702,11 @@ public class ParserNumber {
         List<Result> preferredTokens = tokens.stream().sorted((o1, o2) -> {
             String o1Content = o1.token.getContent();
             String o2Content = o2.token.getContent();
-            boolean o1matches = o1Content.contains("S") && o1Content.contains("E") && o1Content.matches("S\\d+E\\d+");
-            boolean o2matches = o2Content.contains("S") && o2Content.contains("E") && o2Content.matches("S\\d+E\\d+");
-            return Boolean.compare(o2matches, o1matches);
+            boolean o1IsSXXEXX = o1Content.contains("S") && o1Content.contains("E") && o1Content.matches("S\\d+E\\d+");
+            boolean o2IsSXXEXX = o2Content.contains("S") && o2Content.contains("E") && o2Content.matches("S\\d+E\\d+");
+            int o2Value = o2IsSXXEXX ? 2 : (StringUtils.isNumeric(o2Content) ? 1 : 0);
+            int o1Value = o1IsSXXEXX ? 2 : (StringUtils.isNumeric(o1Content) ? 1 : 0);
+            return Integer.compare(o2Value, o1Value);
         }).collect(Collectors.toList());
         for (Result it : preferredTokens) {
             boolean numericFront = it.token.getContent().length() > 0 && Character.isDigit(it.token.getContent()
