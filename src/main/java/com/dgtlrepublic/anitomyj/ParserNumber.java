@@ -700,8 +700,10 @@ public class ParserNumber {
      */
     public boolean searchForEpisodePatterns(List<Result> tokens) {
         List<Result> preferredTokens = tokens.stream().sorted((o1, o2) -> {
-            boolean o1matches = o1.token.getContent().matches("S\\d+E\\d+");
-            boolean o2matches = o2.token.getContent().matches("S\\d+E\\d+");
+            String o1Content = o1.token.getContent();
+            String o2Content = o2.token.getContent();
+            boolean o1matches = o1Content.contains("S") && o1Content.contains("E") && o1Content.matches("S\\d+E\\d+");
+            boolean o2matches = o2Content.contains("S") && o2Content.contains("E") && o2Content.matches("S\\d+E\\d+");
             return Boolean.compare(o2matches, o1matches);
         }).collect(Collectors.toList());
         for (Result it : preferredTokens) {
