@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -698,7 +699,12 @@ public class ParserNumber {
      * @return true if an episode number was found
      */
     public boolean searchForEpisodePatterns(List<Result> tokens) {
-        for (Result it : tokens) {
+        List<Result> preferredTokens = tokens.stream().sorted((o1, o2) -> {
+            boolean o1matches = o1.token.getContent().matches("S\\d+E\\d+");
+            boolean o2matches = o2.token.getContent().matches("S\\d+E\\d+");
+            return Boolean.compare(o2matches, o1matches);
+        }).collect(Collectors.toList());
+        for (Result it : preferredTokens) {
             boolean numericFront = it.token.getContent().length() > 0 && Character.isDigit(it.token.getContent()
                                                                                                    .charAt(0));
 
