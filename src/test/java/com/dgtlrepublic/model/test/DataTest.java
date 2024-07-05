@@ -10,10 +10,7 @@
 package com.dgtlrepublic.model.test;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
@@ -75,7 +72,7 @@ public class DataTest {
                                                   testCase.getKey(),
                                                   elValue,
                                                   testCase.getValue()));
-            } else if (elValue instanceof List && !((List) elValue).containsAll((Collection<?>) testCase.getValue())) {
+            } else if (elValue instanceof List && !((List<?>) elValue).containsAll((Collection<?>) (testCase.getValue() instanceof String ? Arrays.asList(testCase.getValue()) : testCase.getValue()))) {
                 throw new Exception(String.format("%n[%s] Incorrect List Values:(%s) [%s] { required: [%s] } ",
                                                   fileName,
                                                   testCase.getKey(),

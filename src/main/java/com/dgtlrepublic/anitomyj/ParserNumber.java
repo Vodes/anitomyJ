@@ -254,10 +254,6 @@ public class ParserNumber {
         if (numericFront && numericBack)
             if (matchFractionalEpisodePattern(word, token))
                 return true;
-        // e.g. "4a", "111C"
-        if (numericFront && !numericBack)
-            if (matchPartialEpisodePattern(word, token))
-                return true;
         // e.g. "#01", "#02-03v2"
         if (numericBack)
             if (matchNumberSignPattern(word, token))

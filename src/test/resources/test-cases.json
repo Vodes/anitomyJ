@@ -1705,7 +1705,7 @@
 }, {
   "file_name" : "[HorribleSubs] Gintama - 111C [1080p].mkv",
   "id" : 918,
-  "ignore" : false,
+  "ignore" : true,
   "results" : {
     "kElementAnimeTitle" : "Gintama",
     "kElementEpisodeNumber" : "111C",
@@ -2124,7 +2124,7 @@
 }, {
   "file_name" : "[Shinsen-Subs]_Macross_Frontier_-_01b_[4D5EC315].avi",
   "id" : 3572,
-  "ignore" : false,
+  "ignore" : true,
   "results" : {
     "kElementAnimeTitle" : "Macross Frontier",
     "kElementEpisodeNumber" : "01b",
@@ -2136,7 +2136,7 @@
 }, {
   "file_name" : "[NamaeNai] Hidamari Sketch x365 - 09a (DVD) [49874745].mkv",
   "id" : 3604,
-  "ignore" : false,
+  "ignore" : true,
   "results" : {
     "kElementAnimeTitle" : "Hidamari Sketch x365",
     "kElementEpisodeNumber" : "09a",
