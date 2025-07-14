@@ -66,8 +66,8 @@ public class ParserNumber {
     /** Returns whether or not the {@code number} is a valid episode number. */
     public boolean isValidEpisodeNumber(String number) {
         try {
-            return NumberFormat.getInstance().parse(number).doubleValue() <= kEpisodeNumberMax;
-        } catch (ParseException | NullPointerException | NumberFormatException e) {
+            return Double.parseDouble(number) <= kEpisodeNumberMax;
+        } catch (NullPointerException | NumberFormatException e) {
             return false;
         }
     }
